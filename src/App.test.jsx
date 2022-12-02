@@ -1,8 +1,16 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
+import { expect } from "vitest";
 import App from "./App";
-import { expect, test } from "vitest";
 
-test("renders correctly", () => {
+it("displays 😐 emoji by default", () => {
+  // TODO: Implement this test
+});
+
+it("displays 😞 emoji when 0 is selected", async () => {
   render(<App />);
-  expect(screen.getByText("Hello world!")).toBeInTheDocument();
+
+  const input = screen.getByLabelText(/feeling/i);
+  fireEvent.change(input, { target: { value: 0 } });
+
+  expect(screen.getByText("😞")).toBeInTheDocument();
 });
